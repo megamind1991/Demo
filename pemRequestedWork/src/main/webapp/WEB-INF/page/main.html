@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="https://getbootstrap.com/favicon.ico">
+
+<title>开发二部保守案件管理</title>
+
+<!-- Bootstrap core CSS -->
+<link href="./ui/bootstrap.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="./ui/dashboard.css" rel="stylesheet">
+<link href="./ui/bootstrap-datepicker.standalone.min.css" rel="stylesheet">
+<!-- <link href="./ui/now-ui-dashboard.css" rel="stylesheet"> -->
+<!-- 	<link href="./ui/bootstrap-datetimepicker.css"rel="stylesheet"> -->
+	<link href="./ui/animate.css"rel="stylesheet">
+<style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation {
+	from {opacity: 0.99
+}
+
+to {
+	opacity: 1
+}
+
+}
+@keyframes chartjs-render-animation {
+	from {opacity: 0.99
+}
+
+to {
+	opacity: 1
+}
+
+}
+.chartjs-render-monitor {
+	-webkit-animation: chartjs-render-animation 0.001s;
+	animation: chartjs-render-animation 0.001s;
+}
+
+.readall-box {
+	position: relative;
+	z-index: 100;
+	text-align: center;
+}
+.read-more-mask {
+	height: 45px;
+	background: -moz-linear-gradient(bottom,rgba(255,255,255,.1),rgba(255,255,255,0));
+	background: -webkit-gradient(linear,0 top,0 bottom,from(rgba(255,255,255,0)),to(#fff));
+	background: -o-linear-gradient(bottom,rgba(255,255,255,.1),rgba(255,255,255,0))
+}
+
+.feather-chevrons-down
+{
+	width:25px;
+	height:25px;
+	position:relative;
+	animation:mymove 1s infinite;
+	-webkit-animation:mymove 1s infinite; /* Safari and Chrome */
+}
+
+@keyframes mymove
+{
+	from {top:0px;}
+	to {top:20px;}
+}
+
+@-webkit-keyframes mymove /* Safari and Chrome */
+{
+	from {top:0px;}
+	to {top:20px;}
+}
+
+.box-shadow{
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes lds-gear {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes lds-gear {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+
+</style>
+<style type="text/css">
+  .lds-roller {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-roller div {
+  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  transform-origin: 40px 40px;
+}
+.lds-roller div:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #007bff;
+  margin: -4px 0 0 -4px;
+}
+.lds-roller div:nth-child(1) {
+  animation-delay: -0.036s;
+}
+.lds-roller div:nth-child(1):after {
+  top: 63px;
+  left: 63px;
+}
+.lds-roller div:nth-child(2) {
+  animation-delay: -0.072s;
+}
+.lds-roller div:nth-child(2):after {
+  top: 68px;
+  left: 56px;
+}
+.lds-roller div:nth-child(3) {
+  animation-delay: -0.108s;
+}
+.lds-roller div:nth-child(3):after {
+  top: 71px;
+  left: 48px;
+}
+.lds-roller div:nth-child(4) {
+  animation-delay: -0.144s;
+}
+.lds-roller div:nth-child(4):after {
+  top: 72px;
+  left: 40px;
+}
+.lds-roller div:nth-child(5) {
+  animation-delay: -0.18s;
+}
+.lds-roller div:nth-child(5):after {
+  top: 71px;
+  left: 32px;
+}
+.lds-roller div:nth-child(6) {
+  animation-delay: -0.216s;
+}
+.lds-roller div:nth-child(6):after {
+  top: 68px;
+  left: 24px;
+}
+.lds-roller div:nth-child(7) {
+  animation-delay: -0.252s;
+}
+.lds-roller div:nth-child(7):after {
+  top: 63px;
+  left: 17px;
+}
+.lds-roller div:nth-child(8) {
+  animation-delay: -0.288s;
+}
+.lds-roller div:nth-child(8):after {
+  top: 56px;
+  left: 12px;
+}
+@keyframes lds-roller {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+</style>
+</head>
+
+<body>
+	<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">开发二部保守案件管理</a>
+		<input class="form-control form-control-dark w-100"
+			placeholder="Search" aria-label="Search" type="text">
+		<ul class="navbar-nav px-3">
+			<li class="nav-item text-nowrap"><a class="nav-link" href="#">Sign
+					out</a></li>
+		</ul>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-1 d-none">
+				<nav class="d-none d-md-block bg-light sidebar">
+					<div class="sidebar-sticky">
+						<ul class="nav flex-column">
+							<li class="nav-item"><a class="nav-link active" href="#">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+										viewBox="0 0 24 24" fill="none" stroke="currentColor"
+										stroke-width="2" stroke-linecap="round"
+										stroke-linejoin="round" class="feather feather-home">
+										<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+										<polyline points="9 22 9 12 15 12 15 22"></polyline></svg> Dashboard
+									<span class="sr-only">(current)</span>
+							</a></li>
+							<li class="nav-item"><a class="nav-link" href="#"> <svg
+										xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+										viewBox="0 0 24 24" fill="none" stroke="currentColor"
+										stroke-width="2" stroke-linecap="round"
+										stroke-linejoin="round" class="feather feather-file">
+										<path
+											d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+										<polyline points="13 2 13 9 20 9"></polyline></svg> Orders
+							</a></li>
+							<li class="nav-item"><a class="nav-link" href="#"> <svg
+										xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+										viewBox="0 0 24 24" fill="none" stroke="currentColor"
+										stroke-width="2" stroke-linecap="round"
+										stroke-linejoin="round" class="feather feather-shopping-cart">
+										<circle cx="9" cy="21" r="1"></circle>
+										<circle cx="20" cy="21" r="1"></circle>
+										<path
+											d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+									Products
+							</a></li>
+							<li class="nav-item"><a class="nav-link" href="#"> <svg
+										xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+										viewBox="0 0 24 24" fill="none" stroke="currentColor"
+										stroke-width="2" stroke-linecap="round"
+										stroke-linejoin="round" class="feather feather-users">
+										<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+										<circle cx="9" cy="7" r="4"></circle>
+										<path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+										<path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg> Customers
+							</a></li>
+							<li class="nav-item"><a class="nav-link" href="#"> <svg
+										xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+										viewBox="0 0 24 24" fill="none" stroke="currentColor"
+										stroke-width="2" stroke-linecap="round"
+										stroke-linejoin="round" class="feather feather-bar-chart-2">
+										<line x1="18" y1="20" x2="18" y2="10"></line>
+										<line x1="12" y1="20" x2="12" y2="4"></line>
+										<line x1="6" y1="20" x2="6" y2="14"></line></svg> Reports
+							</a></li>
+							<li class="nav-item"><a class="nav-link" href="#"> <svg
+										xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+										viewBox="0 0 24 24" fill="none" stroke="currentColor"
+										stroke-width="2" stroke-linecap="round"
+										stroke-linejoin="round" class="feather feather-layers">
+										<polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+										<polyline points="2 17 12 22 22 17"></polyline>
+										<polyline points="2 12 12 17 22 12"></polyline></svg> Integrations
+							</a></li>
+						</ul>
+
+						<h6
+							class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+							<span>Saved reports</span> <a
+								class="d-flex align-items-center text-muted" href="#"> <svg
+									xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+									viewBox="0 0 24 24" fill="none" stroke="currentColor"
+									stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+									class="feather feather-plus-circle">
+									<circle cx="12" cy="12" r="10"></circle>
+									<line x1="12" y1="8" x2="12" y2="16"></line>
+									<line x1="8" y1="12" x2="16" y2="12"></line></svg>
+							</a>
+						</h6>
+						<ul class="nav flex-column mb-2">
+							<li class="nav-item"><a class="nav-link" href="#"> <svg
+										xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+										viewBox="0 0 24 24" fill="none" stroke="currentColor"
+										stroke-width="2" stroke-linecap="round"
+										stroke-linejoin="round" class="feather feather-file-text">
+										<path
+											d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+										<polyline points="14 2 14 8 20 8"></polyline>
+										<line x1="16" y1="13" x2="8" y2="13"></line>
+										<line x1="16" y1="17" x2="8" y2="17"></line>
+										<polyline points="10 9 9 9 8 9"></polyline></svg> Current month
+							</a></li>
+							<li class="nav-item"><a class="nav-link" href="#"> <svg
+										xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+										viewBox="0 0 24 24" fill="none" stroke="currentColor"
+										stroke-width="2" stroke-linecap="round"
+										stroke-linejoin="round" class="feather feather-file-text">
+										<path
+											d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+										<polyline points="14 2 14 8 20 8"></polyline>
+										<line x1="16" y1="13" x2="8" y2="13"></line>
+										<line x1="16" y1="17" x2="8" y2="17"></line>
+										<polyline points="10 9 9 9 8 9"></polyline></svg> Last quarter
+							</a></li>
+							<li class="nav-item"><a class="nav-link" href="#"> <svg
+										xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+										viewBox="0 0 24 24" fill="none" stroke="currentColor"
+										stroke-width="2" stroke-linecap="round"
+										stroke-linejoin="round" class="feather feather-file-text">
+										<path
+											d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+										<polyline points="14 2 14 8 20 8"></polyline>
+										<line x1="16" y1="13" x2="8" y2="13"></line>
+										<line x1="16" y1="17" x2="8" y2="17"></line>
+										<polyline points="10 9 9 9 8 9"></polyline></svg> Social
+							</a></li>
+							<li class="nav-item"><a class="nav-link" href="#"> <svg
+										xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+										viewBox="0 0 24 24" fill="none" stroke="currentColor"
+										stroke-width="2" stroke-linecap="round"
+										stroke-linejoin="round" class="feather feather-file-text">
+										<path
+											d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+										<polyline points="14 2 14 8 20 8"></polyline>
+										<line x1="16" y1="13" x2="8" y2="13"></line>
+										<line x1="16" y1="17" x2="8" y2="17"></line>
+										<polyline points="10 9 9 9 8 9"></polyline></svg> Year-end sale
+							</a></li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+
+<!-- 			<main role="main" class="ml-sm-auto col-lg-11 pt-3 px-4"> -->
+			<main role="main" class=" col-lg-12 pt-3 px-4">
+			<div
+				style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"
+				class="chartjs-size-monitor">
+				<div class="chartjs-size-monitor-expand"
+					style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+					<div
+						style="position: absolute; width: 1000000px; height: 1000000px; left: 0; top: 0"></div>
+				</div>
+				<div class="chartjs-size-monitor-shrink"
+					style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+					<div
+						style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div>
+				</div>
+			</div>
+			<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center"  id ="topBar" >
+				<h2><p class="font-weight-bold">案件一覧</p></h2>
+				<div class="btn-toolbar mb-2 mb-md-0">		
+					<div class="mr-2">
+						<form id="file_form" method="post" enctype="multipart/form-data" action="./uploadEXCEL">
+							<div class="custom-file">
+							  <input type="file" class="custom-file-input" id="customFile" name="customFile">
+							  <label class="custom-file-label text-truncate"  for="customFile" >Choose file</label>
+							</div>
+						</form>	
+					</div>
+					<div class="btn-group mr-2">
+						<button id="share" class="btn btn-sm btn-outline-secondary">Upload</button>
+						<button id="export" class="btn btn-sm btn-outline-secondary">Export</button>
+					</div>
+					<div class="btn-group mr-2">
+						<button id="new" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModal" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>&nbsp;New</button>
+					</div>					
+					<button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+							viewBox="0 0 24 24" fill="none" stroke="currentColor"
+							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+							class="feather feather-calendar">
+		             	   <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+			                <line x1="16" y1="2" x2="16" y2="6"></line>
+			                <line x1="8" y1="2" x2="8" y2="6"></line>
+			                <line x1="3" y1="10" x2="21" y2="10"></line>
+		                </svg>
+						This week
+					</button>
+				</div>
+			</div>
+			<div class="table-responsive">
+			<div class="readall-box">
+				<table class="table table-striped table-sm table-hover form-group">
+					<thead>
+						<tr>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+				<div class="load d-none " style="height:200px">
+						<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>				
+				</div>
+				<div class="read-more-mask" >
+					<a class="read-more" href="javascript:"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-down"><polyline points="7 13 12 18 17 13"></polyline><polyline points="7 6 12 11 17 6"></polyline></svg></a>
+				</div>
+				</div>
+			</div>
+				
+			<div id="dropdown" class="dropdown d-none">
+			    <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split btn-sm"  data-toggle="dropdown">
+			    	<span class="badge badge-light">无<span>
+			      	<span class="caret"></span>
+			    </button>
+			    <div class="dropdown-menu box-shadow">
+			      <a class="dropdown-item" href="javascript:void(0)" value=" "><span class="badge badge-light">无</span></a>
+			      <a class="dropdown-item" href="javascript:void(0)" value="danger"><span class="badge badge-danger">高</span></a>
+			      <a class="dropdown-item" href="javascript:void(0)" value="warning"><span class="badge badge-warning">中</span></a>
+			      <a class="dropdown-item" href="javascript:void(0)" value="success"><span class="badge badge-success">低</span></a>
+			      <div class="dropdown-divider"></div>
+			      <a class="dropdown-item" href="javascript:void(0)" value="secondary"><span class="badge badge-secondary">废止</span></a>
+			      <a class="dropdown-item" href="javascript:void(0)" value="primary"><span class="badge badge-primary">主要</span></a>
+			    </div>
+			  </div>
+			  
+			  <div id="select" class="d-none">
+			      <select class="form-control " style="height: 25px; line-height: 25px;width:77px;padding:0px;font-size:13.93px">
+			      	<option value=" ">-----</option>
+			        <option value="creating">作成中</option>
+			        <option value="testing">测试中</option>
+			        <option value="reviewing">reView中</option>
+			        <option value="releasing">已纳品</option>
+			      </select>
+			  </div>
+			  
+			  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel"><B>追加案件</B></h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				        <form id="case_form" method="post" action="./saveCase">
+							<div class="form-group input-group-sm mb-1">
+						      <label class="col-form-label">SEQNO:</label>
+							  <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="SEQNO"  name="caseSeqno">
+							</div>
+							<div class="form-group input-group-sm mb-1">
+						      <label class="col-form-label">問題管理NO:</label>
+							  <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="問題管理NO" name="quNum">
+							</div>
+							<div class="form-group input-group-sm mb-1">
+						      <label class="col-form-label">プロダクトID:</label>
+							  <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="プロダクトID" name="projectId">
+							</div>
+							<div class="form-group input-group-sm mb-1">
+						      <label class="col-form-label">FDver:</label>
+							  <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="FDver" name="fdVer">
+							</div>
+							<div class="form-group input-group-sm mb-1">
+						      <label class="col-form-label">依頼作業:</label>
+							  <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="依頼作業" name="dealType">
+							</div>
+							<div class="form-group input-group-sm mb-1">
+						      <label class="col-form-label">プロダクト種別:</label>
+							  <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="プロダクト種別" name="projectType">
+							</div>
+							<div class="form-group input-group-sm mb-1">
+						      <label class="col-form-label">仕様発行日:</label>
+							  <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="仕様発行日" name="specificationIssueDate">
+							</div>
+							<div class="form-group input-group-sm mb-1">
+						      <label class="col-form-label">希望納期:</label>
+							  <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="希望納期" name="desiredDeliveryDate">
+							</div>
+							<div class="form-group input-group-sm mb-1">
+						      <label class="col-form-label">納期遵守:</label>
+							  <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="納期遵守" name="timeCompliance">
+							</div>
+							<div class="form-group input-group-sm mb-1">
+						      <label class="col-form-label">上流見積:</label>
+							  <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="上流見積" name="upEstimates">
+							</div>
+							<div class="form-group input-group-sm mb-1">
+						      <label class="col-form-label">担当SE:</label>
+							  <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="担当SE" name="seName">
+							</div>			
+				        </form>
+				      </div>
+				      <div class="modal-footer ">
+				        <button type="button" class="btn btn-primary"  id="new_case">NEW / UDPATE</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+<!-- 				d-flex -->
+			<div class="d-none  justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+				<h1 class="h2">xxxxxxxx</h1>
+				<ul class="pagination">
+					<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+					<li class="page-item active"><a class="page-link" href="#">1</a></li>
+					<li class="page-item"><a class="page-link" href="#">2</a></li>
+					<li class="page-item"><a class="page-link" href="#">3</a></li>
+					<li class="page-item"><a class="page-link" href="#">Next</a></li>
+				</ul>
+				<div class="btn-toolbar mb-2 mb-md-0">
+					<div class="btn-group mr-2">
+						<button class="btn btn-sm btn-outline-secondary">Share</button>
+						<button class="btn btn-sm btn-outline-secondary">Export</button>
+					</div>
+					<button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+							viewBox="0 0 24 24" fill="none" stroke="currentColor"
+							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+							class="feather feather-calendar">
+             	   <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+	                <line x1="16" y1="2" x2="16" y2="6"></line>
+	                <line x1="8" y1="2" x2="8" y2="6"></line>
+	                <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+						This week
+					</button>
+				</div>
+			</div>
+
+			<canvas class="my-4 chartjs-render-monitor d-none" id="myChart" width="1538"
+				height="649" style="display: block; width: 1538px; height: 649px;"></canvas>
+
+
+			</main>
+		</div>
+	</div>
+	<div id="dialog_content"></div>
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="./ui/jquery-3.3.1.min.js"></script>
+	<script>
+		window.jQuery
+				|| document
+						.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')
+	</script>
+<!-- 	<script src="./ui/popper.js"></script> -->
+<!-- 	<script src="./ui/bootstrap.js"></script> -->
+	<script src="./ui/bootstrap.bundle.js"></script>
+
+	<!-- Icons -->
+	<script src="./ui/feather.js"></script>
+	<!-- Jquery UI -->
+	<script src="./ui/jquery-ui.min.js"></script>
+	<script src="./ui/moment-with-locales.js"></script>
+
+<!-- 	<script src="./ui/bootstrap-datetimepicker.min.js"></script> -->
+<!-- 	<script src="./ui/bootstrap-datetimepicker.js"></script> -->
+	<script src="./ui/bootstrap-datepicker.min.js"></script>
+	<script src="./ui/bootstrap-datepicker.zh-CN.js"></script>
+	<script src="./ui/bootstrap-notify.js"></script>
+	<script src="./ui/perfect-scrollbar.jquery.min.js"></script>
+<!-- 	<script src="./ui/now-ui-dashboard.js"></script> -->
+	
+	<script>
+		feather.replace()
+	</script>
+
+	<!-- Graphs -->
+	<script src="./ui/Chart.js"></script>
+	<script>
+		var ctx = document.getElementById("myChart");
+		var result,aHeadList,jFieldMapping;
+		var page = 0;
+		var isFilter =false;
+		var filterData ={};
+		var isAjax = false;
+		var myChart = new Chart(ctx, {
+			type : 'line',
+			data : {
+				labels : [ "Sunday", "Monday", "Tuesday", "Wednesday",
+						"Thursday", "Friday", "Saturday" ],
+				datasets : [ {
+					data : [ 15339, 21345, 18483, 24003, 23489, 24092, 12034 ],
+					lineTension : 0,
+					backgroundColor : 'transparent',
+					borderColor : '#007bff',
+					borderWidth : 4,
+					pointBackgroundColor : '#007bff'
+				} ]
+			},
+			options : {
+				scales : {
+					yAxes : [ {
+						ticks : {
+							beginAtZero : false
+						}
+					} ]
+				},
+				legend : {
+					display : false,
+				}
+			}
+		});
+
+		$(function() {
+			$(".load").removeClass("d-none");
+			$(".read-more-mask").addClass("d-none");
+			//---------------------------------------------------------------------------
+			//初期化Init
+			$.ajax({
+				url : "./init",
+				type : "post",
+				data : "",
+				dataTpye : "json",
+				success : function(dataResult, status, xhr) {
+					console.log(dataResult);
+					result = dataResult;
+					if(result.ERROR != undefined){
+// 						  var dialog1 = $('<div class="alert alert-danger alert-dismissable fade show "><button type="button" class="close" data-dismiss="alert">&times;</button>'+ result.ERROR+'</div>');
+						  fnShowNotification("top","center",result.ERROR)
+						return;
+					}
+					
+					// -----------------------------------------------------------------------------------------------------------------------
+					// 成功之后保存数据库
+					if(result.EXIST != undefined){
+						fnSaveAllToDB();
+					}
+					
+					// -----------------------------------------------------------------------------------------------------------------------
+					// 画面展示设定
+					// title设置
+					aHeadList = JSON.parse(result.SCR_HEAD);
+					// 字段映射关系
+					jFieldMapping = JSON.parse(result.FIELD_MAPPING);
+					console.log(jFieldMapping);
+					for ( var index in aHeadList) {
+						var $searchIcon = "";
+						// title搜索功能设置
+						if(result.SCR_SEARCH.indexOf(aHeadList[index])  > 0) {
+							$searchIcon = '<a href=javascript:void(0)><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></a>';
+						}
+						var $th = $("<th>" + aHeadList[index] + $searchIcon + "</th>");
+						$th.attr("name",jFieldMapping[aHeadList[index]]);
+						$th.addClass("text-truncate");
+						// title可编辑显示
+						if(result.SCR_EDITED.indexOf(aHeadList[index]) > 0 || result.SCR_DATE_EDITED.indexOf(aHeadList[index]) > 0) {
+							$th.addClass("bg-warning");
+						}
+						
+						$("thead tr").append($th);
+					}
+					
+					// table本体设置
+					aHeadList = JSON.parse(result.SCR_ORDER);
+					fnCreateTableBody(result,aHeadList,jFieldMapping,0)
+					
+					// 主体表绑定事件
+					// -----------------------------------------------------------------------------------------------------------------------
+					// 可编辑列设置
+					fnTableEdited();
+					
+					//加载完成后 各种事件绑定
+					fnBindEvent();
+					
+					$(".load").addClass("d-none");
+					$(".read-more-mask").removeClass("d-none");
+				}
+			})
+
+			//---------------------------------------------------------------------------
+			// 双击后光标最后
+			$.fn.setCursorPosition = function(position) {
+				if (this.lengh == 0)
+					return this;
+				return $(this).setSelection(position, position);
+			}
+
+			$.fn.setSelection = function(selectionStart, selectionEnd) {
+				if (this.lengh == 0)
+					return this;
+				input = this[0];
+
+				if (input.createTextRange) {
+					var range = input.createTextRange();
+					range.collapse(true);
+					range.moveEnd('character', selectionEnd);
+					range.moveStart('character', selectionStart);
+					range.select();
+				} else if (input.setSelectionRange) {
+					input.focus();
+					input.setSelectionRange(selectionStart, selectionEnd);
+				}
+
+				return this;
+			}
+
+			$.fn.focusEnd = function() {
+				this.setCursorPosition(this.val().length);
+			}
+
+			// 非主体表绑定事件
+			//---------------------------------------------------------------------------
+			//table可拖动
+// 			$("tbody").sortable({
+// 			      cancel: "a,select,option"
+// 		    });
+// 			$("tbody").disableSelection();
+
+			
+
+			//---------------------------------------------------------------------------
+			// upload绑定事件
+			$("#customFile").bind("change",function(){
+				$(".custom-file-label").text(getFileName($("#customFile").val()));
+			})
+			$("#share").bind("click",function(){
+				if($("#customFile").val() == ""){
+					fnShowNotification("top","center","上传文件不能为空");
+				}else{
+					$("#file_form").submit();
+				}
+			})
+			
+			
+
+			//---------------------------------------------------------------------------
+			// 追加案件
+			$('#exampleModal').on('show.bs.modal', function (event) {
+			  var ele = $(event.relatedTarget); // Button that triggered the modal
+			  var modal = $(this);
+			  if(ele.is("a")){
+				  modal.find('.modal-title').text('修改案件')
+				  var $tr = ele.parents("tr");
+				  modal.find('[name="caseSeqno"]').val($tr.find('[name="caseSeqno"]').text()).attr("readonly","readonly");
+				  modal.find('[name="quNum"]').val($tr.find('[name="quNum"]').text());
+				  modal.find('[name="projectId"]').val($tr.find('[name="projectId"]').text());
+				  modal.find('[name="fdVer"]').val($tr.find('[name="fdVer"]').text());
+				  modal.find('[name="dealType"]').val($tr.find('[name="dealType"]').text());
+				  modal.find('[name="projectType"]').val($tr.find('[name="projectType"]').text());
+				  modal.find('[name="specificationIssueDate"]').val($tr.find('[name="specificationIssueDate"]').text());
+				  modal.find('[name="desiredDeliveryDate"]').val($tr.find('[name="desiredDeliveryDate"]').text());
+				  modal.find('[name="timeCompliance"]').val($tr.find('[name="timeCompliance"]').text());
+				  modal.find('[name="upEstimates"]').val($tr.find('[name="upEstimates"]').text());
+				  modal.find('[name="seName"]').val($tr.find('[name="seName"]').text());
+			  }else{
+				  modal.find('[name="caseSeqno"]').val("").removeAttr("readonly");
+				  modal.find('[name="quNum"]').val("");
+				  modal.find('[name="projectId"]').val("");
+				  modal.find('[name="fdVer"]').val("");
+				  modal.find('[name="dealType"]').val("");
+				  modal.find('[name="projectType"]').val("");
+				  modal.find('[name="specificationIssueDate"]').val("");
+				  modal.find('[name="desiredDeliveryDate"]').val("");
+				  modal.find('[name="timeCompliance"]').val("");
+				  modal.find('[name="upEstimates"]').val("");
+				  modal.find('[name="seName"]').val("");
+			  }
+			})
+			
+			
+			//---------------------------------------------------------------------------
+			// 更新/追加案件
+			$("#new_case").bind("click",function(){
+				    var $form =  $("#case_form");
+					if($form.find('[name="caseSeqno"]').val().trim() == "" || $form.find('[name="quNum"]').val().trim() == "" ||$form.find('[name="projectId"]').val().trim() == ""
+							|| $form.find('[name="fdVer"]').val().trim() == "" || $form.find('[name="dealType"]').val().trim() == "" || $form.find('[name="projectType"]').val().trim() == "" 
+							|| $form.find('[name="specificationIssueDate"]').val().trim() == "" || $form.find('[name="desiredDeliveryDate"]').val().trim() == "" ||$form.find('[name="timeCompliance"]').val().trim() == ""
+							|| $form.find('[name="upEstimates"]').val().trim() == "" || $form.find('[name="seName"]').val().trim() == ""){
+						fnShowNotification("top","center","内容不能为空");
+						return;
+					}
+					$("#case_form").submit();
+			})
+			
+		});
+		
+		
+		// Table主体设置
+		function fnCreateTableBody(result,aHeadList,jFieldMapping,page){
+			console.log("start : " +page*19 + "  end : " +  (page+1)*19);
+// 			if(!row<result.data.length) fnOpenDialog("没有更多了");
+			if(!(page*19<result.data.length)) fnShowNotification("top","center","没有更多了");
+			for ( var row =page*19; row<result.data.length ;row++) {
+				var $tr = $("<tr></tr>");
+				if(row == (page+1)*19) break;
+				for ( var index in aHeadList) {
+					var $select;
+					// 需要显示的内容获得
+					var sContent = result.data[row][aHeadList[index]] == undefined ? "" : result.data[row][aHeadList[index]];
+					// 各种下拉菜单设置
+					var $td = $("<td></td>");
+					if(result.SCR_SELECT.indexOf(aHeadList[index])  > 0){
+							if(aHeadList[index] == "优先顺" || aHeadList[index] == "importance"){
+								$select = $("#dropdown").children().clone();
+								var $a = $select.find("a[value='"+sContent+"']");
+								var $button = $select.first();
+								// 修改行优先顺序图标 
+								$button.html("").append($a.find("span").clone().after($('<span class="caret"></span>')));
+								// 修正行颜色
+								var level = ["primary","secondary","success","danger","warning","info","light","dark"];
+								for(var op in level){
+									if ($a.find("[class*="+level[op]+"]").length > 0){
+										$button.removeClass().addClass("btn btn-"+level[op]+" dropdown-toggle dropdown-toggle-split btn-sm");
+										$tr.first().removeClass().addClass("table-"+level[op]);
+									} 
+								}								
+							} else {
+								$select = $("#select").children().clone();
+								$select.val(sContent == "" ? " ":sContent);
+								$tr.removeClass();
+								sContent == "releasing" ?	$tr.addClass("table-secondary") : null; 
+							}
+							$td.append($select);
+					} else {
+						$td.text(sContent);
+					}
+					
+					// TD内容设置
+					$td.attr("name",jFieldMapping[aHeadList[index]]).attr("title",sContent);
+					
+					// 内容缩进显示设置
+					if(result.SCR_TRUNCATE.indexOf(aHeadList[index]) > 0) {
+						$td.addClass("text-truncate").css("max-width","120px");
+					}
+					
+					// 可编辑列设置
+					if(result.EDITED.indexOf(aHeadList[index]) > 0) {
+						$td.addClass("self-edited");
+					}
+					
+					// 可日期编辑列设置
+					if(result.DATE_EDITED.indexOf(aHeadList[index]) > 0) {
+						$td.addClass("self-date-edited");
+					}
+					$tr.append($td);
+				}
+				$("tbody").append($tr);
+			}
+			
+			$("td[name='caseSeqno']").find("svg").remove();
+			$editSvg = $('<a href="javascript:void(0)" style="color:#ffc107" data-target="#exampleModal" data-toggle="modal"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg></a>');
+			$("td[name='caseSeqno']").prepend($editSvg);
+		}
+		
+		// 获取却对路径下的文件名
+		function getFileName(o){
+		    var pos=o.lastIndexOf("\\");
+		    return o.substring(pos+1);  
+		}
+		
+		function fnTableEdited(){
+			// table可编辑
+			$("table td").filter('.self-edited').unbind("dblclick").dblclick(function() {
+						$("input.border-danger").trigger("blur");
+						var td = $(this);
+						// 根据表格文本创建文本框 并加入表表中--文本框的样式自己调整
+						var text = td.text();
+						var txt = $(
+								"<input type='text'  size='5' class='rounded border border-danger mw-100' >")
+								.val(text);
+	
+						txt.blur(function() {
+							// 失去焦点，保存值。于服务器交互自己再写,最好ajax
+							var newText = $(this).val();
+							
+							// 一件更新
+							if(td.attr("title") != newText){
+								if(isAjax) {
+									fnShowInfoNotification("top","center","操作过快请重试")
+									return; 
+								}
+								isAjax = true;	
+								var jRequestData = '{"caseSeqno": "'+ td.prevAll().filter("[name=caseSeqno]").attr("title") +'", "'+ td.attr("name") +'": "'+ newText +'"}';
+						    	console.log(JSON.parse(jRequestData));
+						    	// 实时一件保存
+								$.ajax({
+									url : "./update",
+									type : "post",
+									data : jRequestData,
+									contentType  : "application/json;charset=utf-8",
+									dataTpye : "json",
+									success : function(result, status, xhr) {
+										console.log(result);
+										console.log("重置ajax");
+										isAjax = false;
+									}
+								})
+								td.attr("title",newText);
+							}
+							
+							// 移除文本框,显示新值
+							$(this).remove();
+							td.text(newText);
+							
+						});
+						td.text("");
+						td.append(txt);
+						txt.focus().focusEnd();
+				});
+			
+
+			$("table td").filter('.self-date-edited').datepicker({
+				    format: "yy/mm/dd",
+				    language: "zh-CN",
+				    todayHighlight: true
+				}).on("hide", function(e) {
+
+				    // 更新数据库
+				    var dSelectDate = $(e.currentTarget).text();
+				    if($(this).attr("title") != $(e.currentTarget).text()){
+						if(isAjax) {
+							fnShowInfoNotification("top","center","操作过快请重试")
+							return; 
+						}
+						isAjax = true;
+				    	var jRequestData = '{"caseSeqno": "'+ $(this).prevAll().filter("[name=caseSeqno]").attr("title") +'", "'+ $(this).attr("name") +'": "'+ dSelectDate +'"}';
+				    	console.log(JSON.parse(jRequestData));
+				    	// 实时一件保存
+						$.ajax({
+							url : "./update",
+							type : "post",
+							data : jRequestData,
+							contentType  : "application/json;charset=utf-8",
+							dataTpye : "json",
+							success : function(result, status, xhr) {
+								console.log(result);
+								isAjax = false;
+							}
+						})
+				           // 最後..
+				           $(this).attr("title",dSelectDate);
+					}
+			    }).on("changeDate", function(e) {
+			    	var dSelectDate = $.fn.datepicker.DPGlobal.formatDate(new Date(e.date.getTime()-e.date.getTimezoneOffset()*60*1000),'yy/mm/dd','zh-CN');
+			    	$(e.currentTarget).text(dSelectDate);
+			    });
+			
+			
+		}
+		
+		function fnBindEvent(){
+				// 下拉菜单绑定事件
+				$(".dropdown-item").unbind("click").bind("click",function(){
+							var $a = $(this);
+							var $tr = $a.parents("tr");
+							var $thisTd = $a.parents("td:first");
+							
+							var sSelectVal = $a.attr("value");
+						    if($thisTd.attr("title") != sSelectVal){
+						    	var jRequestData = '{"caseSeqno": "'+ $tr.find("td[name=caseSeqno]").attr("title") +'", "'+ $thisTd.attr("name") +'": "'+ sSelectVal +'"}';
+						    	console.log(JSON.parse(jRequestData));
+ 						    	// 实时一件保存
+								$.ajax({
+									url : "./update",
+									type : "post",
+									data : jRequestData,
+									contentType  : "application/json;charset=utf-8",
+									dataTpye : "json",
+									success : function(result, status, xhr) {
+										fnTrOption($a);
+										// 修正title值
+										$thisTd.attr("title",sSelectVal);
+									}
+								})
+						    }
+				});
+				
+				// 下拉菜单绑定事件
+				$("select").unbind("change").bind("change",function(){
+							if(isAjax) {
+								fnShowInfoNotification("top","center","操作过快请重试")
+								return; 
+							}
+							isAjax = true;
+							var $select = $(this);
+							var $tr = $select.parents("tr");
+							var $thisTd = $select.parents("td:first");
+							
+							var sSelectVal = $select.val();
+							
+					    	var jRequestData = '{"caseSeqno": "'+ $tr.find("td[name=caseSeqno]").attr("title") +'", "'+ $thisTd.attr("name") +'": "'+ sSelectVal +'"}';
+					    	console.log(JSON.parse(jRequestData));
+						    	// 实时一件保存
+							$.ajax({
+								url : "./update",
+								type : "post",
+								data : jRequestData,
+								contentType  : "application/json;charset=utf-8",
+								dataTpye : "json",
+								success : function(result, status, xhr) {
+									// 修正title值
+									$thisTd.attr("title",sSelectVal);
+									$thisTd.parents("tr:first").removeClass();
+									sSelectVal == "releasing" ?	$thisTd.parents("tr:first").addClass("table-secondary") : null; 
+									isAjax = false;
+								}
+							})
+				});
+				
+				// readMore
+				$(".read-more").unbind("click").bind("click",function(){
+					var url;
+					var data;
+					if(!isFilter){
+						url="./init";
+						data = "";
+					}else{
+						url="./search";
+						data = JSON.stringify(filterData);
+					}
+					
+					$.ajax({
+						url : url,
+						type : "post",
+						data : data,
+						dataTpye : "json",
+						contentType  : "application/json;charset=utf-8",						
+						success : function(dataResult, status, xhr) {
+							console.log(dataResult);
+							// 更新result
+							result = dataResult;
+							if(result.ERROR != undefined){
+// 								  var dialog1 = $('<div class="alert alert-danger alert-dismissable fade show "><button type="button" class="close" data-dismiss="alert">&times;</button>'+ result.ERROR+'</div>');
+								  fnShowNotification("top","center",result.ERROR)
+								return;
+							}
+							
+							aHeadList = JSON.parse(result.SCR_ORDER);
+							fnCreateTableBody(result,aHeadList,jFieldMapping,++page);
+							// 主体表绑定事件
+							// -----------------------------------------------------------------------------------------------------------------------
+							// 可编辑列设置
+							fnTableEdited();
+							
+							//加载完成后 各种事件绑定
+							fnBindEvent();
+						}
+					})
+				});
+				
+				
+				// search
+				$(".feather-search").unbind("click").bind("click",function(){
+					var $th = $(this).parents("th");
+					$.notifyClose();
+					fnShowSearchNotification(($(window).width() - ($(this).offset().left)),$(this).offset().top,$th);
+				});
+		 }
+		
+		function fnTrOption($a){
+			// 修改行优先顺序图标 
+			$a.parents(".dropdown-menu").prev("button").html("").append($a.find("span").clone().after($('<span class="caret"></span>')));
+			// 修正行颜色
+			var level = ["primary","secondary","success","danger","warning","info","light","dark"];
+			for(var index in level){
+				$a.find("[class*="+level[index]+"]").length > 0 ? $a.parents(".dropdown-menu").prev("button").removeClass().addClass("btn btn-"+level[index]+" dropdown-toggle dropdown-toggle-split btn-sm").parents("tr:first").removeClass().addClass("table-"+level[index]) : null;
+			}
+	    }		
+		
+		function fnSaveAllToDB(){
+			// TODO
+			// 数据库同步中。。。
+			
+			// 从excel中获得数据成功后 保存导数据库
+			$.ajax({
+				url : "./saveAll",
+				type : "post",
+				data : "",
+				dataTpye : "json",
+				success : function(result, status, xhr) {
+					if(result.ERROR != undefined){
+						  fnShowNotification("top","center",result.ERROR)
+						return;
+					}
+				}
+			})
+	  }	
+		
+		function fnOpenDialog(msg){
+			  var dialog1 = $('<div class="alert alert-danger alert-dismissable fade show "><button type="button" class="close" data-dismiss="alert">&times;</button>'+ msg+'</div>');
+			  dialog1.dialog({ 
+				  autoOpen: false,
+				  maxWidth: 600,
+				  minHeight: 77,
+				  open: function (event, ui) {
+					      $(".ui-dialog-titlebar-close", $(this).parent()).hide();
+					      $(".ui-dialog-titlebar-close", $(this).parent()).parent().hide();
+				   },
+				   position: { my: "top", at: "top", of: $("#topBar") }
+			   });
+			  dialog1.dialog( "open" );
+		  }
+		
+		function fnShowNotification(from, align ,msg){
+	    	color = 'danger';
+
+	    	$.notify({
+	        	message: msg
+	        },{
+	            type: color,
+	            timer: 5000,
+	            placement: {
+	                from: from,
+	                align: align
+	            },
+	            allow_dismiss: true,
+	            z_index: 4031
+	        });
+		}
+		
+		function fnShowInfoNotification(from, align ,msg){
+	    	color = 'info';
+
+	    	$.notify({
+	        	message: msg
+	        },{
+	            type: color,
+	            timer: 5000,
+	            placement: {
+	                from: from,
+	                align: align
+	            },
+	            allow_dismiss: true
+	        });
+		}
+		
+		function fnShowSearchNotification(x, y,th){
+			var name = th.attr("name");
+	    	color = 'light';
+
+	    	$.notify({
+	        	message: "<div class='input-group input-group-sm ' style='width:150px'> <input class='form-control' name='"+name+"' type='text'  placeholder='Search' ></input></div>"
+	        },{
+	            type: color,
+	            timer: 50000,
+	            allow_dismiss: false,
+	            offset : {
+	            	x : x-150,
+	            	y : y+23
+	            },
+	            allow_dismiss: true,
+	            onShow : function(){
+	            	$('input[name='+name+']').focus().val(filterData[name]);
+	            	$('div[data-notify="container"]').width("160px").addClass("box-shadow");
+	                $('input[name='+name+']').unbind('keypress').bind('keypress',function(event){
+	                    if(event.keyCode == "13")   
+	                    {
+	    					filterData[name] = $(this).val();
+	    					console.log(filterData);
+							$.ajax({
+								url : "./search",
+								type : "post",
+								data : JSON.stringify(filterData),
+								dataTpye : "json",
+								contentType  : "application/json;charset=utf-8",
+								success : function(dataResult, status, xhr) {
+									console.log(dataResult);
+									// 更新result
+									result = dataResult;
+									if(result.ERROR != undefined){
+										  fnShowNotification("top","center",result.ERROR)
+										return;
+									}
+									
+									// 清空tbody
+									$("tbody").html("");
+									page = 0;
+									isFilter =true;
+									//展示画面
+									aHeadList = JSON.parse(result.SCR_ORDER);
+									fnCreateTableBody(result,aHeadList,jFieldMapping,0);
+									// 主体表绑定事件
+									// -----------------------------------------------------------------------------------------------------------------------
+									// 可编辑列设置
+									fnTableEdited();
+									
+									//加载完成后 各种事件绑定
+									fnBindEvent();
+								}
+							})
+	                    }
+	                });
+	            },
+	    		animate: {
+	    			enter: 'animated fadeInLeft',
+	    			exit: 'animated fadeOutUp'
+	    		}
+	        });
+		}
+	</script>
+</body>
+</html>

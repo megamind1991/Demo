@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	
+	
+	
+	<context:component-scan base-package="com.me.ga"></context:component-scan>
+	<context:property-placeholder location="classpath:db.properties"/>
+
+	<bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driver}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<bean name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+			<property name="dataSource"  ref="dataSource"></property>
+			<property name="mapperLocations" value="classpath:criteria.xml"></property>
+<!-- 			<property name="configLocation"  value="classpath:mybatisSpring.xml"></property> -->
+	</bean>
+		
+<!-- 		传统的DAO实现 不用mybatis的接口映射的实现 注意editImpl要继承SqlSessionDaoSupport（注入SqlSessionFactory） -->
+<!-- 	<bean name="editImpl" class="com.me.ga.daoImpl.EditImpl"> -->
+<!-- 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property> -->
+<!-- 	</bean> -->
+
+<!-- 接口实现DAO 方法1 -->
+<!-- 		<bean name="mapperFactory"  class="org.mybatis.spring.mapper.MapperFactoryBean"> -->
+<!-- 			<property name="mapperInterface" value="com.me.ga.mapper.CriteriaMapper"></property> -->
+<!-- 			<property name="sqlSessionFactory" ref="sqlSessionFactory"></property> -->
+<!-- 		</bean> -->
+
+	<!-- 接口实现DAO 方法2 通过扫描-->
+	<bean  class="org.mybatis.spring.mapper.MapperScannerConfigurer" >
+	<property name="basePackage" value="com.me.ga.mapper"></property>
+	</bean>
+		
+	<bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+		
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+</beans>

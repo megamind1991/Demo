@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.me.ga.mapper.CriteriaMapper">
+	 <insert id="insert$customerBykey"  >
+<!-- 	 		<selectKey keyProperty="" order="BEFORE" resultType=""> -->
+<!-- 	 					SELECT ELEARNING.STUD_ID_SEQ.NEXTVAL FROM DUAL -->
+<!-- 	 		</selectKey> -->
+			INSERT INTO customer
+			( id , name , age ) VALUES
+			( #{param1} , #{param2} , #{param3} )
+	 </insert>
+	 <delete id="delete$customerByKey" parameterType="String">
+	 		DELETE
+	 		FROM customer
+	 		WHERE id = #{value}
+	 </delete>
+	 <update id="update$customerByKey" parameterType="com.me.ga.entity.Customer">
+			UPDATE customer
+	 		SET name = #{name},
+	 			age = #{age}
+	 		WHERE id = #{id}
+	 </update>
+	 <select id="selectone$customerByKey" parameterType="Int" resultType="com.me.ga.entity.Customer">
+	 		SELECT * 
+	 		FROM customer
+	 		WHERE id = #{value}
+	 </select>
+	 <select id="selectall$customerByKey"  resultType="com.me.ga.entity.Customer">
+	 		SELECT * 
+	 		FROM customer
+	 </select>
+	 <select id="selectlike$customerByKey"  parameterType="String" resultType="com.me.ga.entity.Customer">
+	 		SELECT * 
+	 		FROM customer
+	 		WHERE name like #{name}
+	 </select>
+	 <insert id="insert$case"  parameterType="com.me.ga.entity.Case">
+			INSERT INTO GLAD_CASE
+			(
+				CASE_SEQNO,
+				QU_NUM,
+				PROJECT_ID,
+				FD_VER,
+				DEAL_TYPE,
+				PROJECT_TYPE,
+				SPECIFICATION_ISSUE_DATE,
+				DESIRED_DELIVERY_DATE,
+				TIME_COMPLIANCE,
+				UP_ESTIMATES,
+				SE_NAME
+			) VALUES
+			(
+				#{caseSeqno},
+				#{quNum},
+				#{projectId},
+				#{fdVer},
+				#{dealType},
+				#{projectType},
+				#{specificationIssueDate},
+				#{desiredDeliveryDate},
+				#{timeCompliance},
+				#{upEstimates},
+				#{seName}
+			)
+	 </insert>
+	<insert id="insert$caseProcessInfo"  parameterType="com.me.ga.entity.CaseProcessInfo">
+				INSERT INTO GLAD_CASE_PROCESS_INFO
+				(
+					INFO_ID,
+					CASE_SEQNO,
+					START_DATE,
+					DOWN_PE,
+					ANSWER_DELIVERY_DATE,
+					DOWN_ESTIMATES,
+					CASE_TYPE,
+					IMPORTANCE,
+					DOWN_REVIEW,
+					DOWN_STATUS,
+					DOWN_ACTUAL_ESTIMATES,
+					B_TYPE,
+					DOWN_ACTUAL_PE
+				) VALUES
+				(
+					#{infoId},
+					#{caseSeqno},
+					#{startDate},
+					#{downPe},
+					#{answerDeliveryDate},
+					#{downEstimates},
+					#{caseType},
+					#{importance},
+					#{downReview},
+					#{downStatus},
+					#{downActualEstimates},
+					#{btype},
+					#{downActualPe}
+				)
+		 </insert>	
+ 	 <select id="selectall$case"  resultType="com.me.ga.entity.CaseForDis">
+				SELECT 
+		        T1.CASE_SEQNO as caseSeqno, 
+		        T1.QU_NUM as quNum, 
+		        T1.PROJECT_ID as projectId, 
+		        T1.FD_VER as fdVer, 
+		        T1.DEAL_TYPE as dealType, 
+		        T1.PROJECT_TYPE as projectType, 
+		        T1.SPECIFICATION_ISSUE_DATE as specificationIssueDate, 
+		        T1.DESIRED_DELIVERY_DATE as desiredDeliveryDate, 
+		        T1.TIME_COMPLIANCE as timeCompliance, 
+		        T1.UP_ESTIMATES as upEstimates, 
+		        T1.SE_NAME as seName, 
+		        T2.START_DATE as startDate, 
+		        T2.DOWN_PE as downPe, 
+		        T2.ANSWER_DELIVERY_DATE as answerDeliveryDate, 
+		        T2.DOWN_ESTIMATES as downEstimates, 
+		        T2.CASE_TYPE as caseType, 
+		        T2.IMPORTANCE as importance, 
+		        T2.DOWN_REVIEW as downReview, 
+		        T2.DOWN_STATUS as downStatus, 
+		        T2.DOWN_ACTUAL_ESTIMATES as downActualEstimates,
+		        T2.B_TYPE as btype,
+		        T2.DOWN_ACTUAL_PE as downActualPe
+				FROM GLAD_CASE T1 LEFT OUTER  JOIN GLAD_CASE_PROCESS_INFO T2 ON 
+		 	   (
+					T1.CASE_SEQNO = T2.CASE_SEQNO
+				)
+				ORDER BY
+				T2.B_TYPE,
+				T2.ANSWER_DELIVERY_DATE,
+				T2.IMPORTANCE,
+				T1.DESIRED_DELIVERY_DATE,
+				T1.CASE_SEQNO
+	 </select> 
+ 	 <select id="select$specificCase"  parameterType="com.me.ga.entity.CaseForDis" resultType="com.me.ga.entity.CaseForDis">
+				SELECT 
+		        T1.CASE_SEQNO as caseSeqno, 
+		        T1.QU_NUM as quNum, 
+		        T1.PROJECT_ID as projectId, 
+		        T1.FD_VER as fdVer, 
+		        T1.DEAL_TYPE as dealType, 
+		        T1.PROJECT_TYPE as projectType, 
+		        T1.SPECIFICATION_ISSUE_DATE as specificationIssueDate, 
+		        T1.DESIRED_DELIVERY_DATE as desiredDeliveryDate, 
+		        T1.TIME_COMPLIANCE as timeCompliance, 
+		        T1.UP_ESTIMATES as upEstimates, 
+		        T1.SE_NAME as seName, 
+		        T2.START_DATE as startDate, 
+		        T2.DOWN_PE as downPe, 
+		        T2.ANSWER_DELIVERY_DATE as answerDeliveryDate, 
+		        T2.DOWN_ESTIMATES as downEstimates, 
+		        T2.CASE_TYPE as caseType, 
+		        T2.IMPORTANCE as importance, 
+		        T2.DOWN_REVIEW as downReview, 
+		        T2.DOWN_STATUS as downStatus, 
+		        T2.DOWN_ACTUAL_ESTIMATES as downActualEstimates,
+		        T2.B_TYPE as btype,
+		        T2.DOWN_ACTUAL_PE as downActualPe
+				FROM GLAD_CASE T1 LEFT OUTER  JOIN GLAD_CASE_PROCESS_INFO T2 ON 
+		 	   (
+					T1.CASE_SEQNO = T2.CASE_SEQNO
+				)
+			  <where>
+			  		<if test="caseSeqno != null and caseSeqno != ' '.toString()">
+			  			AND T1.CASE_SEQNO LIKE '%${caseSeqno}%'
+			  		</if>
+			  		<if test="quNum != null and quNum != ' '.toString()">
+			  			AND T1.QU_NUM LIKE '%${quNum}%'
+			  		</if>
+			  		<if test="projectId != null and projectId != ' '.toString()">
+			  			AND T1.PROJECT_ID LIKE '%${projectId}%'
+			  		</if>
+			  		<if test="dealType != null and dealType != ' '.toString()">
+			  			AND T1.DEAL_TYPE LIKE '%${dealType}%'
+			  		</if>
+			  		<if test="projectType != null and projectType != ' '.toString()">
+			  			AND T1.PROJECT_TYPE LIKE '%${projectType}%'
+			  		</if>
+			  		
+			  		<if test="startDate != null and startDate != ' '.toString()">
+			  			AND T2.START_DATE LIKE '%${startDate}%'
+			  		</if>
+			  		<if test="downPe != null and downPe != ' '.toString()">
+			  			AND T2.DOWN_PE LIKE '%${downPe}%'
+			  		</if>
+			  		<if test="answerDeliveryDate != null and answerDeliveryDate != ' '.toString()">
+			  			AND T2.ANSWER_DELIVERY_DATE LIKE '%${answerDeliveryDate}%'
+			  		</if>
+			  		<if test="importance != null and importance != ' '.toString()">
+			  			AND T2.IMPORTANCE LIKE '%${importance}%'
+			  		</if>
+			  		<if test="downStatus != null and downStatus != ' '.toString()">
+			  			AND T2.DOWN_STATUS LIKE '%${downStatus}%'
+			  		</if>
+			  		<if test="btype != null and btype != ' '.toString()">
+			  			AND T2.B_TYPE LIKE '%${btype}%'
+			  		</if>
+			  		<if test="downActualPe != null and downActualPe != ' '.toString()">
+			  			AND T2.DOWN_ACTUAL_PE LIKE '%${downActualPe}%'
+			  		</if>	
+			  </where>	
+			  	ORDER BY
+				T2.B_TYPE,
+				T2.ANSWER_DELIVERY_DATE,
+				T2.IMPORTANCE,
+				T1.DESIRED_DELIVERY_DATE,
+				T1.CASE_SEQNO			
+	 </select> 	 
+	 <delete id="delete$case" parameterType="String">
+	 		DELETE
+	 		FROM GLAD_CASE
+	 </delete>
+	 <delete id="delete$caseProcessInfo" parameterType="String">
+	 		DELETE
+	 		FROM GLAD_CASE_PROCESS_INFO
+	 </delete>
+	 <delete id="delete$caseProcessInfoByKey" parameterType="String">
+	 		DELETE
+	 		FROM GLAD_CASE_PROCESS_INFO
+	 		WHERE CASE_SEQNO = #{value}
+	 </delete>
+	 <select id="select$caseProcessInfoByKey"  parameterType="String" resultType="com.me.ga.entity.CaseProcessInfo">
+	 		SELECT 
+		        T.INFO_ID as infoId, 
+		        T.CASE_SEQNO as caseSeqno, 
+		        T.START_DATE as startDate, 
+		        T.DOWN_PE as downPe, 
+		        T.ANSWER_DELIVERY_DATE as answerDeliveryDate, 
+		        T.DOWN_ESTIMATES as downEstimates, 
+		        T.CASE_TYPE as caseType, 
+		        T.IMPORTANCE as importance, 
+		        T.DOWN_REVIEW as downReview, 
+		        T.DOWN_STATUS as downStatus, 
+		        T.DOWN_ACTUAL_ESTIMATES as downActualEstimates,
+		        T.B_TYPE as btype,
+		        T.DOWN_ACTUAL_PE as downActualPe    
+	 		FROM GLAD_CASE_PROCESS_INFO T
+	 			WHERE T.CASE_SEQNO = #{value}
+	 </select>
+	 <delete id="delete$caseByKey" parameterType="String">
+	 		DELETE
+	 		FROM GLAD_CASE
+	 		WHERE CASE_SEQNO = #{value}
+	 </delete>
+	 <select id="select$caseByKey"  parameterType="String" resultType="com.me.ga.entity.Case">
+	 		SELECT 
+		        T1.CASE_SEQNO as caseSeqno, 
+		        T1.QU_NUM as quNum, 
+		        T1.PROJECT_ID as projectId, 
+		        T1.FD_VER as fdVer, 
+		        T1.DEAL_TYPE as dealType, 
+		        T1.PROJECT_TYPE as projectType, 
+		        T1.SPECIFICATION_ISSUE_DATE as specificationIssueDate, 
+		        T1.DESIRED_DELIVERY_DATE as desiredDeliveryDate, 
+		        T1.TIME_COMPLIANCE as timeCompliance, 
+		        T1.UP_ESTIMATES as upEstimates, 
+		        T1.SE_NAME as seName, 
+	 		FROM GLAD_CASE T1
+	 			WHERE T1.CASE_SEQNO = #{value}
+	 </select>	 
+</mapper>
